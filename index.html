@@ -5,7 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Faded Journeys: Holocaust Victims from the Czech Republic</title>
         <link rel="stylesheet" href="styles.css">
+        <!-- Sample Leaflet CSS for map styling -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     </head>
+
     <body>
         <header>
             <nav class="navigation"></nav>
@@ -23,10 +26,18 @@
             </div>
         </section>
 
+        <!-- Heatmap container -->
+         <div id="map-container">
+            <div id="map"></div>
+        </div>
+
         <!-- Scripts -->
          <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js" defer></script>
          <script src="https://unpkg.com/scrollama" defer></script>
          <script src="https://d3js.org/d3.v7.min.js" defer></script>
-         <script src="script.js"></script>
+         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+         <script src="http://leaflet.github.io/Leaflet.markercluster/example/realworld.10000.js"></script> <!-- This script contains addressPoints data -->
+         <script src="leaflet-heat.js"></script>
+         <script src="script.js" type="module"></script>
     </body>
 </html>
