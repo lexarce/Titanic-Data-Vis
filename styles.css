@@ -97,7 +97,7 @@ header {
 
 #scrollText {
     position: absolute;
-    font-size: 1em;
+    font-size: 1.25em;
     margin-top: 700px;
     text-align: center;
     color: black; 
