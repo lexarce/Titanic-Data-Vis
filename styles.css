@@ -135,3 +135,23 @@ header {
     height: 100vh;
 }
 
+/* Graphs Section Styling */
+#graphs-section {
+    margin: 50px auto;
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    width: 90%;
+    max-width: 1200px;
+}
+
+/* Individual SVG Containers */
+.svg-container {
+    width: 100%;
+    height: 400px; /* Adjust height based on graph needs */
+    margin-bottom: 30px;
+    border: 1px solid #ccc;
+    background-color: white;
+    position: relative;
+}
