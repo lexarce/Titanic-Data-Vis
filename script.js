@@ -31,21 +31,21 @@ window.addEventListener('scroll', function() {
     titleText.style.opacity = opacity;
 });
 
-// Initialize the map and add a heatmap layer
-var map = L.map('map').setView([-37.87, 175.475], 11);
+// // Initialize the map and add a heatmap layer
+// var map = L.map('map').setView([-37.87, 175.475], 11);
 
-// OpenStreetMap tile layer
-var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-});
-osm.addTo(map);
+// // OpenStreetMap tile layer
+// var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+//     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+// });
+// osm.addTo(map);
 
-// Process the address points for the heatmap
-addressPoints = addressPoints.map(function (p) { return [p[0], p[1]]; });
+// // Process the address points for the heatmap
+// addressPoints = addressPoints.map(function (p) { return [p[0], p[1]]; });
 
-// Create a heat layer and add it to the map
-var heat = L.heatLayer(addressPoints, {
-    radius: 20, // Customize the radius of the heat spots
-    blur: 15, // Customize the blur intensity
-    maxZoom: 10
-}).addTo(map);
+// // Create a heat layer and add it to the map
+// var heat = L.heatLayer(addressPoints, {
+//     radius: 20, // Customize the radius of the heat spots
+//     blur: 15, // Customize the blur intensity
+//     maxZoom: 10
+// }).addTo(map);
