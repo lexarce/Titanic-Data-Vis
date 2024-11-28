@@ -1,51 +1,54 @@
 
-function createGraph(data) {
+function createGraph(data, color) {
 
+    //{ source: "p1", target: "Died"},
+    //{ source: "p1", target: "Second-Class"}
+
+    let endPointBallSize = 15;
     const graph = {
         nodes: [
-            { id: "Survived", size: 50, color: "green", layer: 0},
-            { id: "Died", size: 50, color: "red", layer: 0},
+            { id: "Survived", size: endPointBallSize , color: "green", layer: 0},
+            { id: "Died", size: endPointBallSize, color: "red", layer: 0},
 
-            { id: "First-Class", size: 25, color: "brown", layer: 3},
-            { id: "Second-Class", size: 25, color: "brown", layer: 3},
-            { id: "Third-Class", size: 25, color: "brown", layer: 3},
-
-            { id: "p1", size: 10, color: "blue", layer: 1},
-            { id: "p2", size: 10, color: "blue", layer: 1},
-            { id: "p3", size: 10, color: "magenta", layer: 2},
-            { id: "p4", size: 10, color: "blue", layer: 1},
-            { id: "p5", size: 10, color: "magenta", layer: 2},
+            { id: "First-Class", size: endPointBallSize , color: "brown", layer: 2},
+            { id: "Second-Class", size: endPointBallSize , color: "brown", layer: 2},
+            { id: "Third-Class", size: endPointBallSize , color: "brown", layer: 2},
         ],
-        links: [
-            { source: "p1", target: "Died", dist: 150 },
-            { source: "p1", target: "Second-Class", dist: 550 },
-
-            { source: "p2", target: "Survived", dist: 150 },
-            { source: "p2", target: "First-Class", dist: 550 },
-
-            { source: "p3", target: "Survived", dist: 150 },
-            { source: "p3", target: "Third-Class", dist: 550 },
-            
-            { source: "p4", target: "Died", dist: 150 },
-            { source: "p4", target: "Second-Class", dist: 550 },
-
-            { source: "p5", target: "Died", dist: 150 },
-            { source: "p5", target: "Third-Class", dist: 550 },
-        ]
+        links: []
     };
 
+    for (d of data) {
+        console.log(d);
+        graph.nodes.push({id: d.Name, size: 5, color: color, layer: 1},);
+        if (+d.Survived == 1) {
+            graph.links.push({source: d.Name, target: "Survived"});
+        } 
+        else {
+            graph.links.push({source: d.Name, target: "Died"});
+        }
+
+        if (+d.Pclass == 1) {
+            graph.links.push({source: d.Name, target: "First-Class"});
+        }
+        else if (+d.Pclass == 2) {
+            graph.links.push({source: d.Name, target: "Second-Class"});
+        } 
+        else {
+            graph.links.push({source: d.Name, target: "Third-Class"});
+        }
+    }
     
     const svg = d3.select(".network-svg");
-    const width = +svg.attr("width");
-    const height = +svg.attr("height");
+    const width = +svg.attr("width") + 500;
+    const height = +svg.attr("height") + 490;
 
     
     const simulation = d3.forceSimulation(graph.nodes)
-        .force("link", d3.forceLink(graph.links).id(d => d.id).distance(200))
+        .force("link", d3.forceLink(graph.links).id(d => d.id).distance(5))
         .force("charge", d3.forceManyBody().strength(-200))
-        .force("x", d3.forceX(520/2).strength(0))
-        .force("y", d3.forceY(d => d.layer * (520 / 2)).strength(1))
-        .force("center", d3.forceCenter(520, 520));
+        .force("x", d3.forceX(d => d.layer * (height / 2)).strength(0.75))
+        .force("y", d3.forceY(width/2).strength(0.5))
+        .force("center", d3.forceCenter(width, height));
 
     
     const link = svg.append("g")
@@ -70,12 +73,12 @@ function createGraph(data) {
         .attr("fill", d => d.color)
         .attr("r", d => d.size);
 
-    
+    /*
     node.append("text")
         .text(d => d.id)
         .attr("x", 12)
         .attr("y", 4);
-
+    */
     
     simulation.on("tick", () => {
         link
@@ -91,17 +94,24 @@ function createGraph(data) {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    
-    console.log("preston graph");
+    console.log("preston's graph");
 
-    let maleData;
-    let femaleData;
+    let maleData = [];
+    let femaleData = [];
 
     Promise.all([d3.csv('data/Titanic-Dataset.csv')])
     .then(function (data) {
-
         
-        createGraph(maleData);
+        for (d of data[0]) {
+            if (d.Sex == "male") {
+                maleData.push(d);
+            }
+            else {
+                femaleData.push(d);
+            }
+        }
+        
+        createGraph(maleData, "blue");
     });
 
 
