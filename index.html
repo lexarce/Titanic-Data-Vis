@@ -11,17 +11,20 @@
             .network-svg {
                 width: 100%;
                 height: 1000px;
-                background-color: #ffffff;
+                background-color: #fafafa;
             }
             .link {
-                stroke: #b9b8b8;
-                stroke-opacity: 0.15;
+                stroke: #a7a6a6;
+                stroke-opacity: 0.6;
                 stroke-width: 1px;
             }
             .link.highlighted {
                 stroke: #ff0000;
-                stroke-opacity: 0.9;
-                stroke-width: 3px;
+                stroke-opacity: 1;
+                stroke-width: 1.5px;
+             }
+             .link.not-highlighted {
+                stroke-opacity: 0;
              }
             .network-tooltip {
                 position: absolute;
@@ -80,6 +83,11 @@
              <div id="network-graph" class="network-container">
                     <h2>Network Graph</h2>
                     <p>asdasd</p>
+                    <br>
+                    <select name="network-selector" id="network-selector" style="width:15%;height:30px">
+                        <option value="male">Men</option>
+                        <option value="female">Women</option>
+                    </select>
                     <br>
                     <svg class="network-svg"></svg>
                     <br>

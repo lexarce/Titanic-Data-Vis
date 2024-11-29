@@ -1,10 +1,20 @@
+function createGraph() {
+    const svg = d3.select(".network-svg");
+    //make links holder
+    svg.append("g")
+        .attr("class", "links")
+    //make nodes holder
+    svg.append("g")
+        .attr("class", "nodes")
+}
 
-function createGraph(data) {
+
+function updateGraph(data) {
 
     //{ source: "p1", target: "Died"},
     //{ source: "p1", target: "Second-Class"}
 
-    let endPointBallSize = 20;
+    let endPointBallSize = 21;
     const graph = {
         nodes: [
             { id: "Survived", size: endPointBallSize , color: "green", layer: 0},
@@ -40,7 +50,7 @@ function createGraph(data) {
             layer = 3
         }
         let color = d.Sex == "male" ? "blue" : "magenta";
-        graph.nodes.push({id: d.Name, size: 6, color: color, layer: layer});
+        graph.nodes.push({id: d.Name, size: 7, color: color, layer: layer});
     }
     
     const svg = d3.select(".network-svg");
@@ -55,9 +65,9 @@ function createGraph(data) {
         .force("y", d3.forceY(width/2).strength(0.5)) //0.5
         .force("center", d3.forceCenter(width, height));
 
-    
-    const link = svg.append("g")
-        .attr("class", "links")
+    svg.selectAll(".link").remove();
+
+    const link = svg.select(".links")
         .selectAll("line")
         .data(graph.links)
         .enter()
@@ -66,25 +76,61 @@ function createGraph(data) {
         .attr("stroke-width", 2);
 
     
-    const node = svg.append("g")
-        .attr("class", "nodes")
+    const node = svg.select(".nodes")
         .selectAll("g")
-        .data(graph.nodes)
+        /*.data(graph.nodes)
         .enter()
-        .append("g");
-
+        .append("g");*/
+        
+    const tooltip = d3.select("#network-tooltip");
     
+   // const node = svg.selectAll("nodes").data(graph.nodes);
+    
+    node.data(graph.nodes).join(
+        enter => enter
+            .append("g")
+            .attr("transform", d => `translate(${width},${height-2000})`)
+            .append("circle") 
+            .attr("class", "network-circle")
+            //.attr("opacity", 0) 
+            .attr("opacity", 1)
+            .attr("fill", d => d.color)
+            .attr("r", 0) 
+            .transition()
+            .duration(800)
+            //.delay((d,i)=> i*4)
+            .attr("opacity", 1)
+            .attr("r", d => d.size),
+        update => update
+            .select("circle")
+            .transition()
+            .duration(300)
+            .attr("fill", d => d.color)
+            .attr("r", d => d.size),
+        exit => {
+            exit
+                .select("circle") 
+                .transition()
+                .duration(1000)
+                .attr("transform", d => `translate(${width},${height-2000})`)
+                .attr("r", 0)
+        }
+    );
+     
+   /*
     node.append("circle")
         .attr("class", "network-circle")
         .attr("fill", d => d.color)
         .attr("r", d => d.size);
-    
-    const tooltip = d3.select("#network-tooltip")
+    */
 
-    node.on("mouseover", (event, d) => {
+    svg.select(".nodes").selectAll("g")
+    .on("mouseover", (event, d) => {
+            
         d3.selectAll(".link")
-            .classed("highlighted", link => link.source.id === d.id || link.target.id === d.id);
-        
+            .classed("highlighted", link => link.source.id === d.id || link.target.id === d.id)
+            .classed("not-highlighted", link => link.source.id !== d.id && link.target.id !== d.id);
+
         d3.selectAll(".network-circle")
             .transition()
             .duration(300)
@@ -94,7 +140,7 @@ function createGraph(data) {
                     (link.target.id === d.id && link.source.id === node.id) ||
                     d.id === node.id 
                 );
-                return isConnected ? 1 : 0.65; 
+                return isConnected ? 1 : 0.2; 
             })
 
         tooltip
@@ -113,7 +159,10 @@ function createGraph(data) {
             .style("top", (event.pageY - 35) + "px");
     })
     .on("mouseout", () => {
-        d3.selectAll(".link").classed("highlighted", false);
+        d3.selectAll(".link")
+            .classed("highlighted", false)
+            .classed("not-highlighted", false)
+
         d3.selectAll(".network-circle")
             .transition()
             .duration(200)
@@ -125,12 +174,16 @@ function createGraph(data) {
     });
     
     simulation.on("tick", () => {
-        link
+        svg.select(".links")
+            .selectAll(".link")
+            .transition()
+            .duration(25)
             .attr("x1", d => d.source.x)
             .attr("y1", d => d.source.y)
             .attr("x2", d => d.target.x)
             .attr("y2", d => d.target.y);
-        node
+        svg.select(".nodes")
+            .selectAll("g")
             .attr("transform", d => `translate(${d.x},${d.y})`);
     });
 }
@@ -138,10 +191,17 @@ function createGraph(data) {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    console.log("preston's graph");
+    //console.log("preston's graph");
+
+    createGraph();
 
     let maleData = [];
     let femaleData = [];
+
+    const networkSelector = document.getElementById("network-selector"); 
+    let updGraph = function() {
+        updateGraph(networkSelector.value === "male" ? maleData : femaleData);
+    }
 
     Promise.all([d3.csv('data/Titanic-Dataset.csv')])
     .then(function (data) {
@@ -155,8 +215,10 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
         
-        createGraph(maleData);
+        updGraph();
     });
 
-
+    networkSelector.addEventListener('change', function(event) {
+        updGraph();
+    })
 });
