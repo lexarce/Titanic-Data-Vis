@@ -11,20 +11,35 @@
             .network-svg {
                 width: 100%;
                 height: 1000px;
-                background-color: #f0f0f0;
-            }
-            .node text {
-                font-size: 12px;
-                pointer-events: none;
+                background-color: #ffffff;
             }
             .link {
-                stroke: #999;
-                stroke-opacity: 0.8;
+                stroke: #b9b8b8;
+                stroke-opacity: 0.15;
+                stroke-width: 1px;
+            }
+            .link.highlighted {
+                stroke: #ff0000;
+                stroke-opacity: 0.9;
+                stroke-width: 3px;
+             }
+            .network-tooltip {
+                position: absolute;
+                text-align: center;
+                width: auto;
+                padding: 6px;
+                font: 16px sans-serif;
+                background: rgb(255, 255, 255);
+                border: 2px solid black;
+                border-radius: 3px;
+                pointer-events: none; 
             }
         </style>
     </head>
 
     <body>
+        <div class="network-tooltip" id="network-tooltip"></div>
+
         <header>
             <nav class="navigation"></nav>
         </header>
@@ -63,7 +78,11 @@
 
             <!-- Network Graph - Preston's Graph -->
              <div id="network-graph" class="network-container">
+                    <h2>Network Graph</h2>
+                    <p>asdasd</p>
+                    <br>
                     <svg class="network-svg"></svg>
+                    <br>
              </div>
 
             <!-- Line Graph - Lex's Graph -->
