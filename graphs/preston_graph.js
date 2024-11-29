@@ -103,17 +103,17 @@ function updateGraph(data) {
             .attr("r", d => d.size),
         update => update
             .select("circle")
-            .transition()
-            .duration(300)
+            //.transition()
+            //.duration(300)
             .attr("fill", d => d.color)
             .attr("r", d => d.size),
         exit => {
             exit
-                .select("circle") 
                 .transition()
                 .duration(1000)
                 .attr("transform", d => `translate(${width},${height-2000})`)
-                .attr("r", 0)
+                .remove()
+
         }
     );
      
@@ -176,8 +176,6 @@ function updateGraph(data) {
     simulation.on("tick", () => {
         svg.select(".links")
             .selectAll(".link")
-            .transition()
-            .duration(25)
             .attr("x1", d => d.source.x)
             .attr("y1", d => d.source.y)
             .attr("x2", d => d.target.x)
