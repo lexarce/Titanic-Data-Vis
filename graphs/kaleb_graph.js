@@ -8,27 +8,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     Promise.all([d3.csv('data/Titanic-Dataset.csv')])
     .then(function (values) {
+
+        //Remove all rows with Survived value = 1
         data = values[0].filter(d => d.Survived === '0');
 
-        // Define the mapping of Embarked codes to coordinates
+        //Map each port to a coordinate
         const embarkedCoordinates = {
-            'C': [49.63348098045927, -1.6167611907751493],  // Cherbourg
-            'Q': [51.79300,-8.254611],  // Queenstown
-            'S': [50.892373550503336, -1.3983326760095773]   // Southampton
+            'C': [49.63348098045927, -1.6167611907751493],  //Cherbourg
+            'Q': [51.79300,-8.254611],  //Queenstown
+            'S': [50.892373550503336, -1.3983326760095773]   //Southampton
         };
 
-        // Iterate over each row in the dataset and update the Embarked column with coordinates
+        //Give each data value a coordinate with a "random" seed to make the coordinates slightly different
         data.forEach(function(d1) {
             const embarkationCode = d1.Embarked;
 
-            // Check if the embarkation code exists in the coordinates map
+
             if (embarkedCoordinates[embarkationCode]) {
-                // Replace the Embarked code with the coordinates
+
                 d1.Latitude = embarkedCoordinates[embarkationCode][0] + seed(parseFloat(d1.PassengerId));
                 d1.Longitude = embarkedCoordinates[embarkationCode][1] + seed(parseFloat(d1.PassengerId) + 1);
             }
         });
 
+        //Create lists of coordinates for each mapping choice
         class1data = data.filter(d => d.Pclass === '1');
         class2data = data.filter(d => d.Pclass === '2');
         class3data = data.filter(d => d.Pclass === '3');
@@ -38,31 +41,27 @@ document.addEventListener('DOMContentLoaded', () => {
         class2Coords = class2data.map(d => [parseFloat(d.Latitude), parseFloat(d.Longitude)]);
         class3Coords = class3data.map(d => [parseFloat(d.Latitude), parseFloat(d.Longitude)]);
 
-
         drawHeatMap('1st Class');
         
 
     });
 
-    // Select the heatmap-graph container
     const heatmapContainer = d3.select('#heatmap-graph');
+    heatmapContainer.style('height', '850px'); 
 
-    heatmapContainer.style('height', '800px'); // Adjust the height as needed
-
+    //Description
     heatmapContainer
-        .append('text') // Create a text element
-        .text('Fatalities from each port are visualized by class. Choose a class:') // The text you want to display
+        .append('text') 
+        .text('Fatalities from each port are visualized by class. Choose a class:') 
         .style('position', 'absolute')
-        .style('top', '60px')
+        .style('top', '110px')
         .style('left', '18%')
         
-
-
-
+    //Dropdown
     const dropdown = heatmapContainer
         .append('div')
         .style('position', 'absolute')
-        .style('top', '100px')
+        .style('top', '150px')
         .style('left', '50%')
         .style('transform', 'translateX(-50%)')
         .append('select')
@@ -74,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
             drawHeatMap(selectedOption);
         });
 
-    // Add options to the dropdown
+    //Options for dropdown
     const options = ['1st Class', '2nd Class', '3rd Class', 'All'];
     dropdown.selectAll('option')
         .data(options)
@@ -83,11 +82,9 @@ document.addEventListener('DOMContentLoaded', () => {
         .text(d => d)
         .attr('value', d => d);
 
-    
-    // Initialize the map and add a heatmap layer
+    //Creates the map itself
     map = L.map('map').setView([50.7256293573177, -5.151692391297452], 7);
 
-    // OpenStreetMap tile layer
     var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', 
     {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -96,24 +93,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
+//Creates a value to add to the coordinates
 function seed(n) {
-    // Convert input to a deterministic hash
+
     let hash = Math.sin(n) * 10000;
     
-    // Extract fractional part to get a pseudo-random value between 0 and 1
     let randomFraction = hash - Math.floor(hash);
     
-    // Scale to the range -0.09 to 0.09
-    return (randomFraction * 0.80) - 0.40; // 0.18 is the range width
+    return (randomFraction * 0.80) - 0.40; 
 }
 
+//Draws the heatmap
 function drawHeatMap(selectedOption) {
-    // Implement your heat map drawing logic here
 
     if (heat) {
         map.removeLayer(heat);
     }
-
 
     if (selectedOption == '1st Class') {
         addressPoints = class1Coords;
@@ -132,11 +127,9 @@ function drawHeatMap(selectedOption) {
 
     }
 
-
-    // Create a heat layer and add it to the map
     heat = L.heatLayer(addressPoints, {
-        radius:12, // Customize the radius of the heat spots
-        blur: 15, // Customize the blur intensity
+        radius:12, 
+        blur: 15, 
         maxZoom: 10
     }).addTo(map);
 

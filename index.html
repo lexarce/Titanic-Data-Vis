@@ -69,11 +69,33 @@
 
             <!-- Ribbon Graph -->
              <div id="ribbon-graph" class="svg-container">
-
+                <br>
+                <text x="50%" y="20px" text-anchor="middle" style="font-size: 24px; font-weight: bold; fill: darkblue;">
+                    Violin Graph
+                </text>
+                <div id="dropdowns" style="position: absolute; top: 100px; left: 300px; z-index: 10; background-color: white; padding: 10px; border-radius: 5px;">
+                    <label for="x-column">X-Axis:</label>
+                    <select id="x-column">
+                        <option value="Pclass">Passenger Class</option>
+                        <option value="Survived">Survived</option>
+                        <option value="Sex">Sex</option>
+                        <option value="Embarked">Embarked From</option>
+                    </select>
+                    
+                    <label for="y-column">Y-Axis:</label>
+                    <select id="y-column">
+                        <option value="Age">Age</option>
+                        <option value="Fare">Fare</option>
+                    </select>
+                </div>
              </div>
 
             <!-- Heatmap - Kaleb's Graph -->
              <div id="heatmap-graph" class="svg-container">
+                <br>
+                <text x="50%" y="20px" text-anchor="middle" style="font-size: 24px; font-weight: bold; fill: darkblue;">
+                    Violin Graph
+                </text>
                 <div id="map-container">
                     <div id="map"></div>
                 </div>
