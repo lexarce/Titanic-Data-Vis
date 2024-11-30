@@ -65,7 +65,7 @@ h1, h2 {
     overflow: hidden;
 }
 
-section img {
+.parallax img {
     position: absolute;
     top: 100px;
     left: 0;
@@ -150,6 +150,17 @@ section img {
     transform: translateX(-50%);
     z-index: 100;
     text-shadow: #00021d 2px 1px 2px;
+}
+
+.intro::before {
+    content: '';
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: linear-gradient(to top, rgba(0, 2, 29, 0), #00021d, transparent);
+    z-index: 1000;
 }
 
 .intro {

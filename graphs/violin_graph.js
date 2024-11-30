@@ -36,10 +36,10 @@ function processData(data) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    console.log("ribbon graph");
+    console.log("violin graph");
 
-    const ribbon = d3.select('#ribbon-graph');
-    ribbon.style('height', '850px'); 
+    const violin = d3.select('#violin-graph');
+    violin.style('height', '850px'); 
 
     // Load the Titanic dataset and preprocess it
     d3.csv("data/Titanic-Dataset.csv").then(function(data) {
@@ -73,12 +73,12 @@ function createViolinGraph(data, xColumn, yColumn) {
         height = 750 - margin.top - margin.bottom;
 
     //remove old graph
-    d3.select("#ribbon-graph").selectAll("svg").remove();
+    d3.select("#violin-graph").selectAll("svg").remove();
 
     //x axis categories
     var xDomain = Array.from(new Set(data.map(d => d[xColumn])));
 
-    var svg = d3.select("#ribbon-graph")
+    var svg = d3.select("#violin-graph")
         .append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
