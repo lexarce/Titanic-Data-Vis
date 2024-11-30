@@ -1,3 +1,16 @@
+
+const LEGEND_DATA = new Map([
+    ["Survived", {color: "green", name: "Survived"}],
+    ["Died", {color: "red", name: "Died"}],
+
+    ["First-Class", {color: "gold", name: "First-Class"}],
+    ["Second-Class", {color: "silver", name: "Second-Class"}],
+    ["Third-Class", {color: "brown", name: "Third-Class"}],
+
+    ["male", {color: "blue", name: "Male"}],
+    ["female", {color: "magenta", name: "Female"}],
+]);
+
 function createGraph() {
     const svg = d3.select(".network-svg");
     //make links holder
@@ -6,8 +19,39 @@ function createGraph() {
     //make nodes holder
     svg.append("g")
         .attr("class", "nodes")
+
+    //create legend
+    const legend = d3.select("svg")
+        .append("g")
+        .attr("class", "legend")
+        .attr("transform", `translate(50, 50)`);
+
+    const legendItems = legend.selectAll(".legend-item")
+        .data(Array.from(LEGEND_DATA.values()))
+        .enter()
+        .append("g")
+        .attr("class", "legend-item")
+        .attr("transform", (d, i) => `translate(0, ${i * 25})`);
+
+    legendItems
+        .append("circle")
+        .attr("r", 10)
+        .attr("fill", d => d.color)
+
+    legendItems
+        .append("text")
+        .attr("x", 20) 
+        .attr("dy", "0.35em")
+        .text(d => d.name.toUpperCase())
+        .style("font-size", "14px")
+        .style("font-family", "Arial, sans-serif");
+
 }
 
+
+function getCircleColor(str) {
+    return LEGEND_DATA.get(str).color
+}
 
 function updateGraph(data) {
 
@@ -17,12 +61,12 @@ function updateGraph(data) {
     let endPointBallSize = 21;
     const graph = {
         nodes: [
-            { id: "Survived", size: endPointBallSize , color: "green", layer: 0},
-            { id: "Died", size: endPointBallSize, color: "red", layer: 0},
+            { id: "Survived", size: endPointBallSize , color: getCircleColor("Survived"), layer: 0},
+            { id: "Died", size: endPointBallSize, color: getCircleColor("Died"), layer: 0},
 
-            { id: "First-Class", size: endPointBallSize , color: "gold", layer: 4},
-            { id: "Second-Class", size: endPointBallSize , color: "silver", layer: 4},
-            { id: "Third-Class", size: endPointBallSize , color: "brown", layer: 4},
+            { id: "First-Class", size: endPointBallSize , color: getCircleColor("First-Class"), layer: 4},
+            { id: "Second-Class", size: endPointBallSize , color: getCircleColor("Second-Class"), layer: 4},
+            { id: "Third-Class", size: endPointBallSize , color: getCircleColor("Third-Class"), layer: 4},
         ],
         links: []
     };
@@ -49,7 +93,7 @@ function updateGraph(data) {
             graph.links.push({source: d.Name, target: "Third-Class"});
             layer = 3
         }
-        let color = d.Sex == "male" ? "blue" : "magenta";
+        let color = getCircleColor(d.Sex)
         graph.nodes.push({id: d.Name, size: 7, color: color, layer: layer});
     }
     
@@ -59,6 +103,7 @@ function updateGraph(data) {
 
     
     const simulation = d3.forceSimulation(graph.nodes)
+        .alpha(0.95)
         .force("link", d3.forceLink(graph.links).id(d => d.id).distance(15)) //20
         .force("charge", d3.forceManyBody(graph.link).strength(-110)) //200
         .force("x", d3.forceX(d => d.layer * (height / 2)).strength(0.2)) //0.2
