@@ -45,3 +45,25 @@ window.addEventListener('scroll', function() {
     const opacity = Math.max(1 - scrollPos / maxScroll, 0);
     titleText.style.opacity = opacity;
 });
+
+// Select all graph containers for sequential animation
+const graphSections = document.querySelectorAll('#graphs-section > .svg-container');
+
+const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+            //observer.unobserve(entry.target);
+        }
+    });
+/*}, {
+    threshold: 0.2 */
+});
+
+// Observe each graph section
+graphSections.forEach(section => {
+    section.classList.add('hidden'); // Add the 'hidden' class initially
+    observer.observe(section);
+});
+
+const hiddenElements = document.querySelectorAll('.hidden');
