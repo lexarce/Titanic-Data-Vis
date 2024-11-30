@@ -42,9 +42,9 @@ function processAgeGroups(dataset) {
 
 // Function to create the line graph
 function createLineGraph(data) {
-  const margin = { top: 20, right: 20, bottom: 50, left: 60 };
+  const margin = { top: 70, right: 30, bottom: 90, left: 70 };
   const width = 800 - margin.left - margin.right;
-  const height = 400 - margin.top - margin.bottom;
+  const height = 600 - margin.top - margin.bottom;
 
   // Select the existing SVG element
   const svg = d3
@@ -53,6 +53,16 @@ function createLineGraph(data) {
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+  // Title
+  svg.append("text")
+    .attr("class", "graph-title")
+    .attr("text-anchor", "middle")
+    .attr("x", width / 2)
+    .attr("y", -margin.top / 2)
+    .style("font-size", "20px")
+    .style("font-weight", "bold")
+    .text("Survival Rate by Age Range");
 
   // Set up scales
   const xScale = d3
@@ -79,6 +89,23 @@ function createLineGraph(data) {
     .style("text-anchor", "end");
 
   svg.append("g").call(yAxis);
+
+   // Add X-axis title
+   svg.append("text")
+    .attr("class", "x-axis-title")
+    .attr("text-anchor", "middle")
+    .attr("x", width / 2)
+    .attr("y", height + margin.bottom - 10) 
+    .text("Age Ranges (Years)");
+   
+   // Add Y-axis title
+   svg.append("text")
+    .attr("class", "y-axis-title")
+    .attr("text-anchor", "middle")
+    .attr("x", -height / 2) 
+    .attr("y", -margin.left + 20) 
+    .attr("transform", "rotate(-90)")
+    .text("Survival Rate (%)");
 
   // Line generator
   const line = d3
