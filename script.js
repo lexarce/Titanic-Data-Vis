@@ -3,6 +3,15 @@ let subText = document.getElementById('subText');
 let scrollText = document.getElementById('scrollText');
 let arrowDown = document.getElementById('arrowDown');
 
+let background = document.getElementById('background');
+let stars = document.getElementById('stars');
+let clouds = document.getElementById('clouds');
+let ocean = document.getElementById('ocean');
+let ship = document.getElementById('ship');
+let iceberg = document.getElementById('iceberg');
+let foreground = document.getElementById('foreground');
+
+
 window.addEventListener('scroll', () => {
     let value = window.scrollY;
 
@@ -20,6 +29,12 @@ window.addEventListener('scroll', () => {
     subText.style.opacity = opacity;
     scrollText.style.opacity = opacity;
     arrowDown.style.opacity = opacity;
+
+    // Move the background up as you scroll
+    stars.style.left = value * 0.25 + 'px';
+    clouds.style.left = value * 1.5 + 'px';
+    iceberg.style.left = value * 0.5 + 'px';
+    ship.style.left = -value * 1.05 + 'px';
 });
 
 window.addEventListener('scroll', function() {
@@ -30,22 +45,3 @@ window.addEventListener('scroll', function() {
     const opacity = Math.max(1 - scrollPos / maxScroll, 0);
     titleText.style.opacity = opacity;
 });
-
-// // Initialize the map and add a heatmap layer
-// var map = L.map('map').setView([-37.87, 175.475], 11);
-
-// // OpenStreetMap tile layer
-// var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-//     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-// });
-// osm.addTo(map);
-
-// // Process the address points for the heatmap
-// addressPoints = addressPoints.map(function (p) { return [p[0], p[1]]; });
-
-// // Create a heat layer and add it to the map
-// var heat = L.heatLayer(addressPoints, {
-//     radius: 20, // Customize the radius of the heat spots
-//     blur: 15, // Customize the blur intensity
-//     maxZoom: 10
-// }).addTo(map);

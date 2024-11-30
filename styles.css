@@ -24,15 +24,14 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 body {
     scroll-behavior: smooth;
-    background-color: #00021d;
+    background: linear-gradient(to bottom, #136fad 0%, #04204f 25%, #02143a 50%, #010a26 75%, #00021d 100%);
     /*background-image: url('greyBG.png');*/
-    margin: 0;
-    padding: 0;
-    height: 100vh;
+    min-height: 100vh;
     width: 100vw;
     background-size: cover;
     background-position: center;
@@ -46,18 +45,6 @@ h1, h2 {
     /*color: #ffffff;*/
 }
 
-header {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 30px 100px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    z-index: 100;
-}
-
 .parallax {
     position: relative;
     display: flex;
@@ -69,12 +56,52 @@ header {
 .parallax-container {
     position: relative;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
+    overflow: hidden;
+}
+
+section img {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    width: 100vw;
+    height: auto;
+    object-fit: cover;
+}
+
+#background {
+    z-index: 1; /* Farthest back */
+}
+
+#stars {
+    z-index: 3;
+    mix-blend-mode: screen;
+}
+
+#clouds {
+    z-index: 3;
+}
+
+#ocean {
+    z-index: 5;
+}
+
+#ship {
+    z-index: 12;
+}
+
+#iceberg {
+    z-index: 13;
+}
+
+#foreground {
+    position: absolute;
+    z-index: 15; /* Closest */
 }
 
 #titleText {
@@ -82,10 +109,15 @@ header {
     font-size: 2em;
     color: white;
     transition: opacity 0.3s ease-out;
+    z-index: 100;
+    text-shadow: #00021d 2px 1px 2px;
 }
 
 .title-large {
     font-size: 2em;
+    z-index: 10;
+    z-index: 100;
+    text-shadow: #00021d 2px 1px 2px;
 }
 
 #subText {
@@ -95,6 +127,8 @@ header {
     text-align: center;
     color: white;
     transition: opacity 0.3s ease-out;
+    z-index: 100;
+    text-shadow: #00021d 2px 1px 2px;
 }
 
 #scrollText {
@@ -102,17 +136,42 @@ header {
     font-size: 1.25em;
     margin-top: 700px;
     text-align: center;
-    color: white; 
+    color: white;
+    z-index: 100;
+    text-shadow: #00021d 2px 1px 2px;
 }
 
 #arrowDown {
     width: 30px;
     height: auto;
     position: absolute;
-    margin-bottom: -800px;
+    margin-top: 1000px;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 10;
+    z-index: 100;
+    text-shadow: #00021d 2px 1px 2px;
+}
+
+.intro {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    padding: 100px;
+    margin-top: 100px;
+    align-items: center;
+    /*text-align: center;*/
+    font-size: 1.5em;
+}
+
+.intro h2 {
+    font-size: 3em;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.intro p {
+    font-size: 1em;
+    color: white;
 }
 
 /* Heatmap container styles */
@@ -131,12 +190,6 @@ header {
     height: 100%;
 }
 
-.screen {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-}
-
 /* Graphs Section Styling */
 #graphs-section {
     margin: 50px auto;
@@ -146,6 +199,7 @@ header {
     border-radius: 8px;
     width: 90%;
     max-width: 1200px;
+    z-index: 100;
 }
 
 /* Individual SVG Containers */
@@ -164,4 +218,35 @@ header {
     display: block;
     margin: auto;
     background-color: rgba(255, 255, 255, 0.9); 
+}
+
+/* Network Graph Styling */
+.network-svg {
+    width: 100%;
+    height: 1000px;
+    background-color: #fafafa;
+}
+.link {
+    stroke: #a7a6a6;
+    stroke-opacity: 0.6;
+    stroke-width: 1px;
+}
+.link.highlighted {
+    stroke: #ff0000;
+    stroke-opacity: 1;
+    stroke-width: 1.5px;
+ }
+ .link.not-highlighted {
+    stroke-opacity: 0;
+ }
+.network-tooltip {
+    position: absolute;
+    text-align: center;
+    width: auto;
+    padding: 6px;
+    font: 16px sans-serif;
+    background: rgb(255, 255, 255);
+    border: 2px solid black;
+    border-radius: 3px;
+    pointer-events: none; 
 }

@@ -6,39 +6,7 @@
         <title>Titanic EAT THE RICH</title>
         <link rel="stylesheet" href="styles.css">
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-
-        <style>
-            .network-svg {
-                width: 100%;
-                height: 1000px;
-                background-color: #fafafa;
-            }
-            .link {
-                stroke: #a7a6a6;
-                stroke-opacity: 0.6;
-                stroke-width: 1px;
-            }
-            .link.highlighted {
-                stroke: #ff0000;
-                stroke-opacity: 1;
-                stroke-width: 1.5px;
-             }
-             .link.not-highlighted {
-                stroke-opacity: 0;
-             }
-            .network-tooltip {
-                position: absolute;
-                text-align: center;
-                width: auto;
-                padding: 6px;
-                font: 16px sans-serif;
-                background: rgb(255, 255, 255);
-                border: 2px solid black;
-                border-radius: 3px;
-                pointer-events: none; 
-            }
-        </style>
-    </head>
+    </head> 
 
     <body>
         <div class="network-tooltip" id="network-tooltip"></div>
@@ -49,6 +17,14 @@
 
         <section class="parallax">
             <div class="parallax-container">
+                <img src="/bg-assets/Background.png" id="background">
+                <img src="/bg-assets/Stars.png" id="stars">
+                <img src="/bg-assets/Clouds.png" id="clouds">
+                <img src="/bg-assets/Ocean.png" id="ocean">
+                <img src="/bg-assets/Ship.png" id="ship">
+                <img src="/bg-assets/Iceberg.png" id="iceberg">
+                <img src="/bg-assets/Foreground.png" id="foreground">
+
                 <h2 id="titleText">
                     <span class="title-large">Lives & Fates Aboard the Titanic</span><br>
                     <span class="title-small">A Data-Driven Story of Tragedy & Survival</span>
@@ -58,12 +34,17 @@
                 <img src="/images/whitearrowndown.png" id="arrowDown">
             </div>
         </section>
-
-        <!-- Heatmap container 
-         <div id="map-container">
-            <div id="map"></div>
-        </div> -->
-
+        <!-- Story Intro -->
+         <div class="intro">
+            <h2>Introduction</h2>
+            <p>
+                The RMS Titanic was a British passenger liner that sank in the North Atlantic Ocean in the early hours of 15 April 1912, after colliding with an iceberg during her maiden voyage from Southampton to New York City.
+                Of the estimated 2,224 passengers and crew aboard, more than 1,500 died, making the sinking at the time one of the deadliest of a single ship and the deadliest peacetime sinking of a superliner or cruise ship to date.
+                With a total length of 882 feet, the Titanic was the largest ship afloat at the time of her maiden voyage.
+                <br><br>
+            </p>
+         </div>
+        
         <!-- Graphs -->
          <section id="graphs-section">
 
