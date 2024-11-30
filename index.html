@@ -34,16 +34,24 @@
                 <img src="/images/whitearrowndown.png" id="arrowDown">
             </div>
         </section>
+
         <!-- Story Intro -->
-         <div class="intro">
-            <h2>Introduction</h2>
-            <p>
-                The RMS Titanic was a British passenger liner that sank in the North Atlantic Ocean in the early hours of 15 April 1912, after colliding with an iceberg during her maiden voyage from Southampton to New York City.
-                Of the estimated 2,224 passengers and crew aboard, more than 1,500 died, making the sinking at the time one of the deadliest of a single ship and the deadliest peacetime sinking of a superliner or cruise ship to date.
-                With a total length of 882 feet, the Titanic was the largest ship afloat at the time of her maiden voyage.
-                <br><br>
-            </p>
-         </div>
+        <div class="intro">
+            <div class="intro-content">
+                <div class="intro-text">
+                    <h2>Introduction</h2>
+                    <p>
+                        The RMS Titanic was a British passenger liner that sank in the North Atlantic Ocean in the early hours of 15 April 1912, after colliding with an iceberg during her maiden voyage from Southampton to New York City.
+                        Of the estimated 2,224 passengers and crew aboard, more than 1,500 died, making the sinking at the time one of the deadliest of a single ship and the deadliest peacetime sinking of a superliner or cruise ship to date.
+                        With a total length of 882 feet, the Titanic was the largest ship afloat at the time of her maiden voyage.
+                        <br><br>
+                    </p>
+                </div>
+                <div class="intro-image">
+                    <img src="images/titanic2.png" alt="Titanic image" width="800px" height="450px">
+                </div>
+            </div>
+        </div>
         
         <!-- Graphs -->
          <section id="graphs-section">
@@ -51,11 +59,9 @@
             <!-- Violin Graph -->
              <div id="violin-graph" class="svg-container hidden">
                 <br>
-                <text x="50%" y="20px" text-anchor="middle" style="font-size: 24px; font-weight: bold; fill: darkblue;">
-                    Violin Graph
-                </text>
-                <div id="dropdowns" style="position: absolute; top: 100px; left: 300px; z-index: 10; background-color: white; padding: 10px; border-radius: 5px;">
-                    <label for="x-column">X-Axis:</label>
+                <graphTitle>Violin Graph</graphTitle>
+                <div id="dropdowns">
+                    <label for="x-column" style="font-weight: bold">X-Axis:</label>
                     <select id="x-column">
                         <option value="Pclass">Passenger Class</option>
                         <option value="Survived">Survived</option>
@@ -63,7 +69,7 @@
                         <option value="Embarked">Embarked From</option>
                     </select>
                     
-                    <label for="y-column">Y-Axis:</label>
+                    <label for="y-column" style="font-weight: bold">Y-Axis:</label>
                     <select id="y-column">
                         <option value="Age">Age</option>
                         <option value="Fare">Fare</option>
@@ -74,27 +80,30 @@
             <!-- Heatmap - Kaleb's Graph -->
              <div id="heatmap-graph" class="svg-container hidden">
                 <br>
-                <text x="50%" y="20px" text-anchor="middle" style="font-size: 24px; font-weight: bold; fill: darkblue;">
-                    Heatmap
-                </text>
                 <div id="map-container">
                     <div id="map"></div>
                 </div>
              </div>
 
             <!-- Network Graph - Preston's Graph -->
-             <div id="network-graph" class="network-container">
-                    <h2>Network Graph of Class to Survival</h2>
+             <div id="network-graph" class="svg-container">
+                <br><br><br>
+                    <graphTitle>Network Graph of Class to Survival</graphTitle>
+                    <br>
                     <p>The graph below shows the realtionship between one's class and survival based on their sex.</p>
                     <p>Many things can be gleamed from this graph such as women regardless of class had a higher chance of survival.</p>
                     <p>While men in first class and second-class had a higher chance of surviving as opposed to men in third class.</p>
-                    <br>
-                    <select name="network-selector" id="network-selector" style="width:15%;height:30px">
+                    <br><br>
+                    <div id="dropdowns">
+                        <label for="network-selector" style="font-weight: bold">Select Gender:</label>
+                        <select name="network-selector" id="network-selector" style="width:15%;height:30px">
                         <option value="male">Men</option>
                         <option value="female">Women</option>
                     </select>
+                    </div>
                     <br>
                     <svg class="network-svg"></svg>
+                    <div class="network-tooltip" id="network-tooltip"></div>
                     <br>
              </div>
 

@@ -47,27 +47,30 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const heatmapContainer = d3.select('#heatmap-graph');
-    heatmapContainer.style('height', '850px'); 
-
-    //Description
+    //heatmapContainer.style('height', '850px'); 
+    
+    // Title
     heatmapContainer
-        .append('text') 
-        .text('Fatalities from each port are visualized by class. Choose a class:') 
-        .style('position', 'absolute')
-        .style('top', '110px')
-        .style('left', '18%')
+        .append('text')
+        .text('Heatmap')
+        .style('font-size', '30px')
+        .style('font-weight', 'bold')
+        .style('margin-bottom', '20px')
+        .style('text-align', 'center');
+        
+    // Description
+    heatmapContainer
+        .append('div')
+        .attr('id', 'heatmap-description')
+        .style('margin-bottom', '10px')
+        .style('text-align', 'center')
+        .style('font-size', '18px')
+        .html('Fatalities from each port are visualized by class. <br>Choose a class:');
         
     //Dropdown
     const dropdown = heatmapContainer
-        .append('div')
-        .style('position', 'absolute')
-        .style('top', '150px')
-        .style('left', '50%')
-        .style('transform', 'translateX(-50%)')
         .append('select')
         .attr('id', 'dropdownMenu')
-        .style('padding', '5px')
-        .style('font-size', '14px')
         .on('change', function () {
             const selectedOption = d3.select(this).property('value');
             drawHeatMap(selectedOption);

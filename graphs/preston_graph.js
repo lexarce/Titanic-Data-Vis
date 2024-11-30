@@ -1,14 +1,14 @@
 
 const LEGEND_DATA = new Map([
-    ["Survived", {color: "green", name: "Survived"}],
-    ["Died", {color: "red", name: "Died"}],
+    ["Survived", {color: "#3E5526", name: "Survived"}],
+    ["Died", {color: "#D12420", name: "Died"}],
 
-    ["First-Class", {color: "gold", name: "First-Class"}],
-    ["Second-Class", {color: "silver", name: "Second-Class"}],
-    ["Third-Class", {color: "brown", name: "Third-Class"}],
+    ["First-Class", {color: "#F8B936", name: "First-Class"}],
+    ["Second-Class", {color: "#C65B23", name: "Second-Class"}],
+    ["Third-Class", {color: "#683D08", name: "Third-Class"}],
 
-    ["male", {color: "blue", name: "Male"}],
-    ["female", {color: "magenta", name: "Female"}],
+    ["male", {color: "#044cb1", name: "Male"}],
+    ["female", {color: "#c72972", name: "Female"}],
 ]);
 
 function createGraph() {

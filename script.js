@@ -53,16 +53,17 @@ const observer = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('show');
-            //observer.unobserve(entry.target);
+        } else {
+            entry.target.classList.remove('show');
         }
     });
-/*}, {
-    threshold: 0.2 */
+}, {
+    threshold: 0.2
 });
 
 // Observe each graph section
 graphSections.forEach(section => {
-    section.classList.add('hidden'); // Add the 'hidden' class initially
+    section.classList.add('hidden'); 
     observer.observe(section);
 });
 

@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function createViolinGraph(data, xColumn, yColumn) {
 
     //margins
-    var margin = { top: 200, right: 30, bottom: 30, left: 40 },
+    var margin = { top: 100, right: 30, bottom: 200, left: 70 },
         width = 1000 - margin.left - margin.right,
         height = 750 - margin.top - margin.bottom;
 
@@ -102,9 +102,9 @@ function createViolinGraph(data, xColumn, yColumn) {
     svg.append("text")
         .attr("class", "x-axis-label")
         .attr("x", width / 2)
-        .attr("y", height + margin.bottom )  
+        .attr("y", height + 60)  
         .style("text-anchor", "middle")
-        .style("font-size", "15px")  
+        .style("font-size", "16px")  
         .style("font-weight", "bold") 
         .text(xColumn); 
 
@@ -114,7 +114,7 @@ function createViolinGraph(data, xColumn, yColumn) {
         .attr("x", -height / 2)
         .attr("y", -margin.left + 10) 
         .style("text-anchor", "middle")
-        .style("font-size", "15px")  
+        .style("font-size", "16px")  
         .style("font-weight", "bold")  
         .text(yColumn);  
 

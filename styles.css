@@ -168,10 +168,29 @@ h1, h2 {
     width: 100%;
     height: 100vh;
     padding: 100px;
-    margin-top: 100px;
+    margin-top: 200px;
     align-items: center;
-    /*text-align: center;*/
+    justify-content: center;
     font-size: 1.5em;
+}
+
+.intro-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    color: white;
+    width: 90%;
+    gap: 50px;
+}
+
+.intro-img {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 .intro h2 {
@@ -185,15 +204,124 @@ h1, h2 {
     color: white;
 }
 
-/* Heatmap container styles */
-#map-container {
-    position: relative;
+/* Graphs Section Styling */
+#graphs-section {
+    display: grid;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+}
+
+/* Individual SVG Containers */
+.svg-container {
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+    border: 1px solid #ccc;
+    background-color: #D2E0ED;
+    padding: 20px;
+}
+
+/* Violin Graph Styling */
+#violin-graph {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+    background-color: white;
+}
+
+#violin-graph graphTitle {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 20px;
+}
+
+#dropdowns {
+    display: flex;
+    gap: 60px;
+    align-items: center;
+    padding: 10px;
+}
+
+#dropdowns label {
+    font-size: 16px; 
+    margin-right: -40px; 
+}
+
+#dropdowns select {
+    width: 200px; 
+    height: 40px; 
+    font-size: 16px; 
+    text-align: center;
+    padding: 5px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    background-color: #f9f9f9; 
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); 
+    transition: all 0.3s ease; 
+}
+
+#dropdowns select:hover {
+    background-color: #e6e6e6; 
+    border-color: #888; 
+}
+
+/* Heatmap Graph Styling*/
+#heatmap-graph {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+    background-color: white;
+    text-align: center;
+}
+
+#heatmap-description {
+    font-size: 16px;
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+
+#heatmap-dropdown {
+    margin-bottom: 20px;
+}
+    
+#heatmap-graph #map-container {
     width: 800px;
     height: 600px;
     border: 1px solid #ccc;
     margin: 20px auto;
-    margin-top: 150px;
-    z-index: 1;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #f9f9f9;
+}
+
+#heatmap-graph #dropdownMenu {
+    width: 200px;
+    height: 40px;
+    font-size: 16px;
+    text-align: center;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    margin-top: 15px;
+    transition: all 0.3s ease;
+}
+
+#heatmap-graph #dropdownMenu:hover {
+    background-color: #e6e6e6;
+    border-color: #888;
 }
 
 #map {
@@ -201,39 +329,14 @@ h1, h2 {
     height: 100%;
 }
 
-/* Graphs Section Styling */
-#graphs-section {
-    /*display: grid;
-    place-items: center;
-    align-content: center;
-    min-height: 100vh;
-    min-width: 100vw;*/
-    margin: 50px auto;
-    text-align: center;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 8px;
-    width: 90%;
-    max-width: 1200px;
-    z-index: 100;
-}
-
-/* Individual SVG Containers */
-.svg-container {
-    width: 100%;
-    height: 700px; /* Adjust height based on graph needs */
-    margin-bottom: 30px;
-    border: 1px solid #ccc;
-    background-color: white;
-    position: relative;
-}
-
+/* Line Graph Styling */
 #line-graph {
     display: flex;
     height: 700px;
     justify-content: center;
     align-items: center;
     margin: 50px auto;
+    background-color: white;
   }
   
   svg text.x-axis-title,
@@ -248,18 +351,19 @@ h1, h2 {
   }
   
 /* Network Graph Styling */
+
 .network-svg {
     width: 100%;
-    height: 1000px;
+    height: 900px;
     background-color: #fafafa;
 }
 .link {
-    stroke: #a7a6a6;
+    stroke: #F7C59F;
     stroke-opacity: 0.6;
     stroke-width: 1px;
 }
 .link.highlighted {
-    stroke: #ff0000;
+    stroke: #FF6B35;
     stroke-opacity: 1;
     stroke-width: 1.5px;
  }
@@ -276,13 +380,22 @@ h1, h2 {
     border: 2px solid black;
     border-radius: 3px;
     pointer-events: none; 
+    opacity: 0;
+    transition: opacity 0.1s ease-in-out;
+    z-index: 100;
+}
+#network-graph graphTitle {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 20px;
 }
 
 /* Initial state: hidden */
 .hidden {
     opacity: 0;
     transform: translateY(50px); 
-    transition: all 1s;
+    transition: opacity 1s ease-out, transform 1s ease-out;
 }
 
 /* Visible state: animation triggered */
