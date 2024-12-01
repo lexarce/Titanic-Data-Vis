@@ -68,3 +68,11 @@ graphSections.forEach(section => {
 });
 
 const hiddenElements = document.querySelectorAll('.hidden');
+
+// Include intros and findings sections for fade-in animation
+const animatedSections = document.querySelectorAll('.intro, .graph-intro, .graph-findings, .svg-container');
+
+animatedSections.forEach(section => {
+    section.classList.add('hidden');
+    observer.observe(section);
+});
