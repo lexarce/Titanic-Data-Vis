@@ -42,8 +42,8 @@ function processAgeGroups(dataset) {
 
 // Function to create the line graph
 function createLineGraph(data) {
-  const margin = { top: 70, right: 30, bottom: 90, left: 70 };
-  const width = 800 - margin.left - margin.right;
+  const margin = { top: 90, right: 30, bottom: 90, left: 70 };
+  const width = 900 - margin.left - margin.right;
   const height = 600 - margin.top - margin.bottom;
 
   // Select the existing SVG element
@@ -86,26 +86,48 @@ function createLineGraph(data) {
     .call(xAxis)
     .selectAll("text")
     .attr("transform", "rotate(-45)")
-    .style("text-anchor", "end");
+    .style("text-anchor", "end")
+    .attr("opacity", 0)
+    .transition()
+    .duration(1500)
+    .attr("opacity", 1);
 
-  svg.append("g").call(yAxis);
+  svg.append("g")
+    .call(yAxis)
+    .selectAll("text")
+    .attr("opacity", 0)
+    .transition()
+    .duration(1500)
+    .attr("opacity", 1);
 
-   // Add X-axis title
-   svg.append("text")
+  // Add axis titles
+  svg.append("text")
     .attr("class", "x-axis-title")
     .attr("text-anchor", "middle")
     .attr("x", width / 2)
     .attr("y", height + margin.bottom - 10) 
     .text("Age Ranges (Years)");
    
-   // Add Y-axis title
-   svg.append("text")
+  svg.append("text")
     .attr("class", "y-axis-title")
     .attr("text-anchor", "middle")
     .attr("x", -height / 2) 
     .attr("y", -margin.left + 20) 
     .attr("transform", "rotate(-90)")
     .text("Survival Rate (%)");
+
+  // Add gradient for the line
+  const gradient = svg.append("defs")
+    .append("linearGradient")
+    .attr("id", "line-gradient")
+    .attr("gradientUnits", "userSpaceOnUse")
+    .attr("x1", 0)
+    .attr("y1", yScale(0))
+    .attr("x2", 0)
+    .attr("y2", yScale(d3.max(data, d => d.survivalRate)));
+
+  gradient.append("stop").attr("offset", "0%").attr("stop-color", "#FF7F50");
+  gradient.append("stop").attr("offset", "100%").attr("stop-color", "#1E90FF");
 
   // Line generator
   const line = d3
@@ -114,14 +136,23 @@ function createLineGraph(data) {
     .y(d => yScale(d.survivalRate))
     .curve(d3.curveMonotoneX);
 
-  // Draw the line
-  svg
-    .append("path")
+  // Draw the line with animation
+  svg.append("path")
     .datum(data)
     .attr("fill", "none")
-    .attr("stroke", "#273852")
+    .attr("stroke", "url(#line-gradient)")
     .attr("stroke-width", 2)
-    .attr("d", line);
+    .attr("d", line)
+    .attr("stroke-dasharray", function () {
+      const length = this.getTotalLength();
+      return `${length} ${length}`;
+    })
+    .attr("stroke-dashoffset", function () {
+      return this.getTotalLength();
+    })
+    .transition()
+    .duration(2000)
+    .attr("stroke-dashoffset", 0);
 
   // Add points
   svg
@@ -145,9 +176,20 @@ function createLineGraph(data) {
             2
           )}%`
         );
+        // Enlarge the point on hover
+        d3.select(event.currentTarget)
+          .transition()
+          .duration(200)
+          .attr("r", 8);
     })
     .on("mouseout", () => {
       d3.select("#tooltip").style("opacity", 0);
+
+      // Shrink the point on mouseout
+      d3.select(event.currentTarget)
+        .transition()
+        .duration(200)
+        .attr("r", 4);
     });
 }
 
