@@ -145,7 +145,7 @@ h1, h2 {
     width: 30px;
     height: auto;
     position: absolute;
-    margin-top: 1000px;
+    margin-top: 750px;
     left: 50%;
     transform: translateX(-50%);
     z-index: 100;
@@ -172,7 +172,7 @@ h1, h2 {
     margin-bottom: 0;
     align-items: center;
     justify-content: center;
-    font-size: 1.5em;
+    font-size: 1em;
     opacity: 0;
     transform: translateY(50px);
     transition: opacity 1s ease-out, transform 1s ease-out
@@ -440,7 +440,7 @@ h1, h2 {
 
 .graph-intro p {
     font-family: 'FiraCodeNerdMono', monospace;
-    font-size: 1.2em;
+    font-size: 1.1em;
     line-height: 1.6;
     color: #dcdcdc; 
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
@@ -495,4 +495,14 @@ h1, h2 {
 .graph-findings.show {
     opacity: 1;
     transform: translateY(0);
+}
+
+.caption {
+    color: #fff;
+    font-size: 16px;
+    text-align: center;
+    padding: 10px;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
 }

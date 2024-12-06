@@ -31,7 +31,7 @@
                     <span class="title-large">Lives & Fates Aboard the Titanic</span><br>
                     <span class="title-small">A Data-Driven Story of Tragedy & Survival</span>
                 </h2>
-                <p id="subText">By:<br>Alexis Arce<br>Taequanson Clarke<br>Kaleb Maull<br>Preston Wilson</p>
+                <p id="subText">By:<br>Alexis Arce<br>Kaleb Maull<br>Preston Wilson<br>Taequanson Clarke</p>
                 <p id="scrollText">Scroll to Continue</p>
                 <img src="/images/whitearrowndown.png" id="arrowDown">
             </div>
@@ -64,9 +64,12 @@
             <div id="violin-intro" class="graph-intro">
                 <h3>Understanding Socio-Economic Disparity</h3>
                 <p>
-                    The Violin Graph provides a lens into how age and ticket fare were distributed among passenger classes on the Titanic.
-                    These variables hint at the socio-economic disparities that shaped the passengers' journeys—and their fates. 
-                    Let's dive into the first visualization to uncover the patterns.
+                    The Titanic was a reflection of Edwardian society, where class and privilege dictated outcomes in life and death.
+                    The wealthiest first-class passengers enjoyed luxurious accommodations and priority access to lifeboats, resulting in
+                    a survival rate of <b>64%</b>, compared to just <b>24%</b> of third-class passengers, who were largely confined to the lower decks.
+                    This stark divide mirrored the rigid social hierarchy of the time, where economic status determined one's opportunities
+                    and chances of survival. The Titanic's tragic fate exposed the harsh inequalities of an era that valued wealth and social
+                    standing above all else.
                 </p>
             </div>
              <div id="violin-graph" class="svg-container hidden">
@@ -89,11 +92,13 @@
                 </div>
              </div>
              <div id="violin-findings" class="graph-findings">
-                <h3>Insights from the Violin Graph</h3>
+                <h3>Insights from the Violin Graph: Age Distribution by Class</h3>
                 <p>
-                    The graph highlights clear disparities: First-Class passengers were generally older and paid significantly higher fares, 
-                    while Third-Class passengers were younger with much lower fares. These differences reflect socio-economic status, 
-                    influencing access to resources during the disaster.
+                    The violin plot visualizes age distribution across passenger classes.
+                    Third-class passengers were predominantly young, with many under the age of <b>30</b>.
+                    In contrast, first-class passengers had a wider age range, including older individuals
+                    who may have beneffited from higher survival chances due to access to lifeboats, prime deck locations,
+                    and resources.
                 </p>
             </div>
 
@@ -104,6 +109,19 @@
                     <div id="map"></div>
                 </div>
              </div>
+             <div id="heatmap-findings" class="graph-findings">
+                <h3>Insights from the Heatmap: Embarkation Points and Survival</h3>
+                <p>
+                    The heatmap illustrates embarkation locations and their survival outcomes.
+                    Southampton, England where <b>72% of passengers boarded</b>, experienced the
+                    most fatalities, with <b>427 lives lost</b>. Most of the third-class passengers,
+                    along with a significant number of second-class and first-class passengers, 
+                    embarked Southampton. Cherbourg, France accounted for <b>19% of the passengers</b>
+                    and <b>75 fatalities</b>, predominantly first-class and second-class travelers.
+                    Queenstown, Ireland accounted for <b>9% of passengers</b> and <b>47 fatalities</b>,
+                    primarily third-class passengers.
+                </p>
+            </div>
 
             <!-- Network Graph - Preston's Graph -->
              <div id="network-graph" class="svg-container">
@@ -126,18 +144,66 @@
                     <div class="network-tooltip" id="network-tooltip"></div>
                     <br>
              </div>
+             <div id="network-findings" class="graph-findings">
+                <h3>Insights from the Network Graph: Class, Gender, and Survival Outcomes</h3>
+                <p>
+                    Network analysis shows that gender played a critical role in survival. Among all female passengers,
+                    <b>74% survived</b>, while only <b>19% of male passengers</b> survived. This disparity reflects evacuation
+                    policies that prioritized women over men, especially in first and second classes. The network
+                    graph highlights these relationships, emphasizing that wealth and gender influenced survival chances.
+                </p>
+            </div>
 
             <!-- Line Graph - Lex's Graph -->
              <div id="line-graph" class="svg-container hidden">
                 <svg id="line-graph-svg"></svg>
              </div>
+             <div id="line-findings" class="graph-findings">
+                <h3>Insights from the Line Graph: Survival Rates by Age Range</h3>
+                <p>
+                    The line graph displaying survival rates by age range highlights significant trends.
+                    Children aged 0-10 had the highest survival rate of <b>60%</b>, reflecting the "women and children first" policy.
+                    In contrast, passengers aged 61-70 had the lowest survival rate at just <b>20%</b>, indicating that older passengers
+                    faced significant disadvantages during the evacuation and rescue efforts.
+                </p>
+             </div>
 
              <!-- Radar Chart -->
               <div id="radar-chart" class="svg-container hidden">
                 <div class="radarChart"></div>
-                
               </div>
+              <div id="radar-findings" class="graph-findings">
+                <h3>Insights from the Radar Chart: Comparison of Survival by Class</h3>
+                <p>
+                    The radar chart compares survival rates, average age, and average fare of passengers across all classes.
+                    First-class passengers paid the highest fares and were generally older, with an average age of approximately <b>39 years</b>,
+                    compared to second-class passengers averaging <b>29 years</b> and third-class passengers averaging <b>24 years</b>.
+                    Survival rates mirror socio-economic divides, with first-class passengers surviving at more than twice the rate of third-class passengers.
+                </p>
+            </div>
 
+            <!-- Photo container -->
+            <div id="titanic-photo" class="svg-container hidden">
+                <img src="/images/titanic_ship.png" alt="Photo 1">
+                  <div class="caption">From the wealthy elite to hardworking immigrants, over 2,300 lives embarked on the Titanic – a powerful reminder of shared human fragility.</div>
+            </div>
+
+            <!-- Conclusion -->
+            <div id="conclusion" class="graph-intro">
+                <h3>Society and Survival: Lessons from the Titanic</h3>
+                <p>
+                    When the Titanic sank on April 15, 1912, only 700 our of more than 2,200 passengers survived.
+                    Despite third-class passengers making up <b>55% of the total passenger population</b>, only <b>24%</b> of the survivors cames from
+                    third-class while <b>63% of first-class passengers</b> survived. Women and children, especially in upper classes, had significantly
+                    higher chances of survival, reflecting the "women and children first" policy. Meanwhile, third-class men and older passengers faced
+                    overwhelming disadvantages, with survival rates plummeting to as low as <b>20%</b> for some age groups.
+                    <br><br>
+                    The embarkation points reveal the diverse backgrounds of those abroad, from wealthy elites departing Cherbourg to hopeful immigrants embarking
+                    Queenstown. The Titanic, as a reflection of its time, laid bare the harsh realities of wealth inequality and social hierarchy, where one's 
+                    fate was determined by their socio-economic status. Through these data visualizations, we gain not only a clearer understanding of the tragic
+                    loss of life but also a deeper appreciation for the human stories behind the statistics.
+                </p>
+            </div>
          </section>
 
         <!-- Scripts -->

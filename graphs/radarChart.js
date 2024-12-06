@@ -1,6 +1,6 @@
 var margin = { top: 170, right: 140, bottom: 100, left: 140 },
     width = 800,
-    height = 800;
+    height = 650;
 
 var color = d3.scaleOrdinal().range(["#EDC951", "#00A0B0", "#CC333F"]); // Yellow, Blue, Red
 

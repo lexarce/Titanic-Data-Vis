@@ -99,7 +99,7 @@ function updateGraph(data) {
     
     const svg = d3.select(".network-svg");
     const width = +svg.attr("width") + 600; //495
-    const height = +svg.attr("height") + 490;
+    const height = +svg.attr("height") + 400;
 
     
     const simulation = d3.forceSimulation(graph.nodes)
